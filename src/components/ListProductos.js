@@ -1,12 +1,13 @@
 import React from 'react'
 
 const ListProductos = ({list}) => {
-    const { id, cantidad ,departamento} = list;
+    const { nombre, cantidad ,departamento,id} = list;
     return (
       <div>
           
-        <p>Id Producto: <span className="fw-bold"> {id}</span></p>
+        <p> Producto: <span className="fw-bold"> {nombre}</span></p>
         <p> Cantidad:<span className="fw-bold"> {cantidad}</span></p>
+        <p> Id:<span className="fw-bold"> {id}</span></p>
         
         {/* {switch (departamento) {
           case 1: 
