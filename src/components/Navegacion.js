@@ -23,7 +23,7 @@ const Navegacion = () => {
       <Navbar bg="light" expand={false}>
         <Container fluid>
           <Navbar.Brand href="#" className="ms-5">Administrador de E-commerce</Navbar.Brand>
-          <div className="d-flex ">
+          <div className="d-flex  ">
             {/* <Form className="d-flex">
               <FormControl
                 type="search"
@@ -33,7 +33,8 @@ const Navegacion = () => {
               />
               <Button variant="outline-success">Search</Button>
             </Form> */}
-            <Mymodal/>
+             <Nav.Link className="ms-5"><Mymodal/></Nav.Link>
+            
             {/* <Nav.Link href="#action1"><i className="far fa-bell mx-4 fs-3 text-dark"></i></Nav.Link> */}
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
           <Navbar.Offcanvas
