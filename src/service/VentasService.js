@@ -13,5 +13,13 @@ const getVenta = async () => {
         throw error;
     }
 };
+const eliminarProducto = async (id) => {
+    try {
+        await axios.delete(`${URL}/${id}`);
+        return "producto eliminado";
+    } catch (error) {
+        throw error;
+    }
+};
 
-export  { getVenta };
+export  { getVenta,eliminarProducto };

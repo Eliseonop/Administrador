@@ -44,9 +44,9 @@ const Dash = () => {
       
 
   return (
-    <Container fluid  >
+    <Container fluid className="my-4" >
       <Row> 
-        <Col lg="3" md="6 ">
+        <Col lg="3" md="6 " sm="6">
          
           {/* Primer card */}
           <Container 
@@ -60,7 +60,7 @@ const Dash = () => {
             </Card.Body>
           </Container > 
         </Col>
-        <Col lg="3" md="6 ">
+        <Col lg="3" md="6 " sm="6">
           {/* Primer card */}
           <Container 
             style={{ width: "18rem", height: "9rem" }}
@@ -73,7 +73,7 @@ const Dash = () => {
             </Card.Body>
           </Container > 
         </Col>
-        <Col lg="3"md="6 ">
+        <Col lg="3"md="6 " sm="6">
           {/* Primer card */}
           <Container 
             style={{ width: "18rem", height: "9rem" }}
@@ -95,7 +95,7 @@ const Dash = () => {
             </Card.Body>
           </Container > 
         </Col>
-        <Col lg="3"md="6 ">
+        <Col lg="3"md="6 " sm="6" >
           {/* Primer card */}
           <Container 
             style={{ width: "18rem", height: "9rem" }}

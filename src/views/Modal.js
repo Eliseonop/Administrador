@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import { Modal, Button, Nav, Container } from "react-bootstrap";
 
-import { getVenta } from "../service/VentasService";
+import { getVenta,eliminarProducto } from "../service/VentasService";
 import NotifyCard from "../components/NotifyCard";
 function Mymodal() {
   const [show, setShow] = useState(false);
@@ -21,6 +21,8 @@ function Mymodal() {
     obtenerVentas();
   }, []);
   
+  
+
 
   return (
     <>
@@ -37,7 +39,7 @@ function Mymodal() {
           {ventas.map((item, i) => (
             <Container>
               {/* <h4>Nuevo Pedido</h4> */}
-              <NotifyCard key={i} item={item} />
+              <NotifyCard key={i} item={item} obtenerVentas={obtenerVentas} />
             </Container>
           ))}
         </Modal.Body>

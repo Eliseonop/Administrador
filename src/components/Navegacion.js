@@ -24,7 +24,7 @@ const Navegacion = () => {
         <Container fluid>
           <Navbar.Brand href="#" className="ms-5">Administrador de E-commerce</Navbar.Brand>
           <div className="d-flex ">
-            <Form className="d-flex">
+            {/* <Form className="d-flex">
               <FormControl
                 type="search"
                 placeholder="Search"
@@ -32,7 +32,7 @@ const Navegacion = () => {
                 aria-label="Search"
               />
               <Button variant="outline-success">Search</Button>
-            </Form>
+            </Form> */}
             <Mymodal/>
             {/* <Nav.Link href="#action1"><i className="far fa-bell mx-4 fs-3 text-dark"></i></Nav.Link> */}
           <Navbar.Toggle aria-controls="offcanvasNavbar" />
@@ -48,14 +48,12 @@ const Navegacion = () => {
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <CardUser />
               </Nav>
-
+              <hr/>
               <Container className="d-grid gap-2 mt-4 ">
                 <Button variant="secondary" size="lg" onClick={click}>
                  <a href="https://e-commerce-2.vercel.app/" className="text-white text-decoration-none">Mi E-commerce</a>
                 </Button>
-                <Button variant="primary" size="lg">
-                  Agregar Producto
-                </Button>
+               
               </Container>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

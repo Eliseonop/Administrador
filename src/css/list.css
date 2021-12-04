@@ -1,0 +1,9 @@
+#vhv{
+    max-height: 180px !important;
+    max-width: 100px !important;
+}
+#tabla{
+    /* overflow:scroll !important;  */
+    height:45vh !important;
+    width:85vw !important;
+}
