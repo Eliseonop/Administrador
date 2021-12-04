@@ -19,7 +19,7 @@ function Mymodal() {
   };
   useEffect(() => {
     obtenerVentas();
-  }, []);
+  }, [obtenerVentas]);
   
   
 

@@ -4,6 +4,7 @@
 }
 #tabla{
     /* overflow:scroll !important;  */
-    height:45vh !important;
+    height:65vh !important;
     width:85vw !important;
+    margin-bottom: 150px !important;
 }

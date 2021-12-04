@@ -187,7 +187,7 @@ export default function ListaProductosView() {
     <>
     <hr/>
       <div className="container " id="tabla">
-       <div className="d-flex justify-content-between mb-2   ">
+       <div className="d-flex justify-content-between mb-3   ">
         <h4 className="text-midle">Listado de Productos</h4>
    
         <button type="button" className="btn btn-md  btn-outline-primary    " onClick={handleShow}>
@@ -195,8 +195,8 @@ export default function ListaProductosView() {
         </button>
 
        </div>
+       <hr/>
        
-        <div className="table-responsive-sm overflow-scroll" id="tabla">
           <table className="table table-hover border border-dark border-2 align-middle table-responsive   table-bordered " >
             <thead className="table align-middle position-relative position-sticky">
               <tr>
@@ -208,6 +208,9 @@ export default function ListaProductosView() {
                 <th>Acciones</th>
               </tr>
             </thead>
+              </table>
+            <div className="table-responsive-sm overflow-scroll" id="tabla">
+            <table className="table table-hover border border-dark border-2 align-middle table-responsive   table-bordered " >
             <tbody>
               {productos.map(
                 ({ nombre, descripcion, precio, imagen, id }, i) => (
@@ -393,6 +396,7 @@ export default function ListaProductosView() {
           </Modal.Footer>
         </Modal>
       </div>
+      <hr/>
     </>
   );
 }
