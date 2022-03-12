@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/list.css"
+import "../css/list.css";
 import { useState, useEffect, useRef } from "react";
 import {
   obtenerProductos,
@@ -11,7 +11,7 @@ import {
 } from "../service/productosService";
 import Swal from "sweetalert2";
 import { Button, Modal } from "react-bootstrap";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from "react-router-dom";
 
 let imagen;
@@ -81,6 +81,7 @@ export default function ListaProductosView() {
     nombre: "",
     descripcion: "",
     precio: 0,
+    tipoProducto: 1,
   });
 
   const actualizarInput = (e) => {
@@ -94,8 +95,8 @@ export default function ListaProductosView() {
   const manejarSubmit = async (e) => {
     e.preventDefault();
     try {
-      const urlImagenSubida = await subirImagen(imagen);
-      await crearProducto({ ...value, imagen: urlImagenSubida });
+      // const urlImagenSubida = await subirImagen(imagen);
+      await crearProducto({ ...value });
       await Swal.fire({
         icon: "success",
         title: "Éxito",
@@ -185,32 +186,35 @@ export default function ListaProductosView() {
 
   return (
     <>
-    <hr/>
-      <div className="container " id="tabla">
-       <div className="d-flex justify-content-between mb-3   ">
-        <h4 className="text-midle">Listado de Productos</h4>
-   
-        <button type="button" className="btn btn-md  btn-outline-primary    " onClick={handleShow}>
-          Añadir nuevo Producto
-        </button>
+      <hr />
+      <div className="container m-0" id="tabla">
+        <div className="d-flex  mb-3   ">
+          <h4 className="text-midle">Listado de Productos</h4>
 
-       </div>
-       <hr/>
-       
-          <table className="table table-hover border border-dark border-2 align-middle table-responsive   table-bordered " >
-            <thead className="table align-middle position-relative position-sticky">
-              <tr>
-                <th>COD. Prod.</th>
-                <th>Producto</th>
-                <th>Descripcion</th>
-                <th>Precio</th>
-                <th>Imagen</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-              </table>
-            <div className="table-responsive-sm overflow-scroll" id="tabla">
-            <table className="table table-hover border border-dark border-2 align-middle table-responsive   table-bordered " >
+          <button
+            type="button"
+            className="btn btn-md  btn-outline-primary    "
+            onClick={handleShow}
+          >
+            Añadir nuevo Producto
+          </button>
+        </div>
+        <hr />
+
+        <table className="table table-hover border border-dark border-2 align-middle table-responsive   table-bordered ">
+          <thead className="table align-middle position-relative position-sticky">
+            <tr>
+              <th>COD. Prod.</th>
+              <th>Producto</th>
+              <th>Descripcion</th>
+              <th>Precio</th>
+              <th>Imagen</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+        </table>
+        <div className="table-responsive-sm overflow-scroll" id="tabla">
+          <table className="table table-hover border border-dark border-2 align-middle table-responsive   table-bordered ">
             <tbody>
               {productos.map(
                 ({ nombre, descripcion, precio, imagen, id }, i) => (
@@ -274,6 +278,18 @@ export default function ListaProductosView() {
                   className="form-control"
                   name="descripcion"
                   value={value.descripcion}
+                  onChange={(e) => {
+                    actualizarInput(e);
+                  }}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Tipo producto</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="tipoProducto"
+                  value={value.tipoProducto}
                   onChange={(e) => {
                     actualizarInput(e);
                   }}
@@ -396,7 +412,7 @@ export default function ListaProductosView() {
           </Modal.Footer>
         </Modal>
       </div>
-      <hr/>
+      <hr />
     </>
   );
 }

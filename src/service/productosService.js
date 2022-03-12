@@ -1,23 +1,29 @@
 import axios from "axios";
 import { storage } from "../config/firebase";
 
-const URL = `${process.env.REACT_APP_API}Productos`;
+const URL = `https://app-backend-ecommerce.herokuapp.com/`;
 
 const obtenerProductos = async () => {
   try {
-    const { data } = await axios.get(URL);
-    return data;
+    const data = await axios.get(`${URL}productos`);
+    console.log(data.data);
+    return data.data.productos;
   } catch (error) {
     throw error;
   }
 };
-
+obtenerProductos();
 const crearProducto = async (nuevoProducto) => {
   try {
     const headers = {
       "Content-Type": "application/json",
     };
-    const { data } = await axios.post(URL, nuevoProducto, { headers });
+    console.log(nuevoProducto);
+
+    const { data } = await axios.post(`${URL}producto`, nuevoProducto, {
+      headers,
+    });
+    console.log(data);
     return data;
   } catch (error) {
     throw error;
@@ -38,7 +44,7 @@ const editarProductoPorId = async (id, objProducto) => {
     const headers = {
       "Content-Type": "application/json",
     };
-    await axios.put(`${URL}/${id}`, objProducto, { headers });
+    await axios.put(`${URL}producto/${id}`, objProducto, { headers });
     return;
   } catch (error) {
     throw error;
@@ -47,7 +53,7 @@ const editarProductoPorId = async (id, objProducto) => {
 
 const eliminarProducto = async (id) => {
   try {
-    await axios.delete(`${URL}/${id}`);
+    await axios.delete(`${URL}producto/${id}`);
     return "producto eliminado";
   } catch (error) {
     throw error;

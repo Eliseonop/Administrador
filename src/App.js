@@ -12,14 +12,17 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dash" element={<PrivateRoute>
-            <HomeView/>
-          </PrivateRoute>}/>
+          <Route
+            path="/dash"
+            element={
+              <PrivateRoute>
+                <HomeView />
+              </PrivateRoute>
+            }
+          />
         </Routes>
-       
       </Router>
     </AuthProvider>
   );
