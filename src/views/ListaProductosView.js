@@ -7,15 +7,12 @@ import {
   editarProductoPorId,
   eliminarProducto,
   crearProducto,
-  subirImagen,
 } from "../service/productosService";
 import Swal from "sweetalert2";
 import { Button, Modal } from "react-bootstrap";
 // import axios from "axios";
 import { useParams } from "react-router-dom";
-
-let imagen;
-
+import { crearImagen, subirImagen } from "../service/imagenService.js";
 export default function ListaProductosView() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -27,7 +24,12 @@ export default function ListaProductosView() {
 
   ////////////////////////////////////////////////////////////////////
   //OBTENER PRODUCTOS
-
+  const [imagen, setImagen] = useState();
+  const [file, setFile] = useState({
+    ext: "",
+    filename: "",
+    contentType: "",
+  });
   const [productos, setProductos] = useState([]);
 
   const getProductos = async () => {
@@ -38,7 +40,8 @@ export default function ListaProductosView() {
       console.log(error);
     }
   };
-
+  console.log(imagen);
+  console.log(file);
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
@@ -85,7 +88,7 @@ export default function ListaProductosView() {
   });
 
   const actualizarInput = (e) => {
-    console.log(e.target.name, e.target.value);
+    // console.log(e.target.name, e.target.value);
     setValue({
       ...value,
       [e.target.name]: e.target.value,
@@ -95,8 +98,19 @@ export default function ListaProductosView() {
   const manejarSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const urlImagenSubida = await subirImagen(imagen);
-      await crearProducto({ ...value });
+      const result = await crearProducto({ ...value });
+      // console.log(data.status);
+      if (result.status === 201 && file) {
+        const {
+          data: { url },
+        } = await crearImagen({ ...file, productoId: result.data.content.id });
+
+        const { status } = await subirImagen(url, file.contentType, imagen);
+        console.log("el estado de la subida a aws es", status);
+      }
+      console.log(result.data);
+
+      // console.log(data.data);
       await Swal.fire({
         icon: "success",
         title: "Éxito",
@@ -108,12 +122,6 @@ export default function ListaProductosView() {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const manejarImagen = (e) => {
-    e.preventDefault();
-    console.log(e.target.files);
-    imagen = e.target.files[0];
   };
 
   ////////////////////////////////////////////////////////////////////
@@ -173,8 +181,28 @@ export default function ListaProductosView() {
 
   const manejarImagenEdit = (e) => {
     e.preventDefault();
+
     console.log(e.target.files);
-    imagen = e.target.files[0]; //como para utilizar
+    setImagen(e.currentTarget.files?.item(0)); //como para utilizar
+    if (e.target.value) {
+      const ext = e.target.value.split(".").at(-1);
+      let contentType = "";
+      switch (ext) {
+        case "jpg":
+          contentType = "image/jpeg";
+          break;
+        case "png":
+          contentType = "image/png";
+          break;
+        case "jpeg":
+          contentType = "image/jpeg";
+          break;
+      }
+      const filename = e.currentTarget.value.split("\\").at(-1)?.split(".")[0];
+      if (filename && ext && contentType) {
+        setFile({ ext, filename, contentType });
+      }
+    }
   };
 
   ////////////////////////////////////////////////////////////////////
@@ -314,7 +342,8 @@ export default function ListaProductosView() {
                 <input
                   type="file"
                   className="form-control"
-                  ref={inputFile}
+                  id="imagen"
+                  accept="image/png, image/gif, image/jpeg"
                   onChange={(e) => {
                     manejarImagenEdit(e);
                   }}
