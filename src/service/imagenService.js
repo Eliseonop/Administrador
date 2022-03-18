@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://app-backend-ecommerce.herokuapp.com";
+const url = "http://localhost:4000";
 
 const axiosRequest = axios.create({ baseURL: url });
 
@@ -10,7 +10,7 @@ function crearImagen(data) {
 
 function subirImagen(url, contentType, file) {
   console.log(contentType);
-  return axiosRequest.put(url, file, {
+  return axios.put(url, file, {
     headers: { "Content-Type": contentType },
   });
 }

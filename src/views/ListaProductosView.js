@@ -104,7 +104,7 @@ export default function ListaProductosView() {
         const {
           data: { url },
         } = await crearImagen({ ...file, productoId: result.data.content.id });
-
+        console.log(url);
         const { status } = await subirImagen(url, file.contentType, imagen);
         console.log("el estado de la subida a aws es", status);
       }
