@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const url = "http://localhost:4000";
+const URL = "https://app-backend-ecommerce.herokuapp.com";
 
-const axiosRequest = axios.create({ baseURL: url });
+const axiosRequest = axios.create({ baseURL: URL });
 
 function crearImagen(data) {
   return axiosRequest.post("/archivo", data);
@@ -11,7 +11,10 @@ function crearImagen(data) {
 function subirImagen(url, contentType, file) {
   console.log(contentType);
   return axios.put(url, file, {
-    headers: { "Content-Type": contentType },
+    headers: {
+      "Content-Type": contentType,
+      "Access-Control-Allow-Origin": "*",
+    },
   });
 }
 export { crearImagen, subirImagen };
